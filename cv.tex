@@ -26,27 +26,14 @@
 %----------------------------------------------------------------------------------------
 
 % article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,12pt]{article}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
+\documentclass[a4paper,11pt]{article}
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES
 %----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage{url}
 \usepackage{parskip} 	
 
@@ -81,15 +68,10 @@
 \titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
 \titlespacing{\section}{0pt}{10pt}{10pt}
 
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
 %Setup hyperref package, and colours for links
 \usepackage[unicode, draft=false]{hyperref}
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
 
 %for social icons
 \usepackage{fontawesome5}
@@ -121,6 +103,13 @@
     \end{minipage}    
     }
 
+% sub-heading inside a job (Responsibilities / Projects / Results / Technologies)
+\newcommand{\jobpart}[1]{\vspace{4pt}\textbf{#1}\vspace{1pt}}
+
+% compact bullet list inside a job
+\newenvironment{joblist}
+    {\begin{itemize}[nosep, leftmargin=1em, itemsep=2pt, label=--]}
+    {\end{itemize}}
 
 
 %----------------------------------------------------------------------------------------
@@ -135,80 +124,137 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
-
 \begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Your Name} \\[7.5pt]
-\href{https://github.com/username}{\raisebox{-0.05\height}\faGithub\ username} \ $|$ \ 
-\href{https://linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
-\href{mailto:email@mysite.com}{\raisebox{-0.05\height}\faEnvelope \ email@mysite.com} \ $|$ \ 
-\href{tel:+000000000000}{\raisebox{-0.05\height}\faMobile \ +00.00.000.000} \\
+\Huge{Alexander Aglerimov} \\[4pt]
+\large{Senior Rust Developer \ $|$ \ Real-Time Computer Vision Backends \ $|$ \ Autonomous Systems} \\[3pt]
+\raisebox{-0.05\height}\faMapMarker \ Buenos Aires, Argentina (remote / open to relocation) \\[7.5pt]
+\href{https://github.com/formiat}{\raisebox{-0.05\height}\faGithub\ formiat} \ $|$ \ 
+\href{https://linkedin.com/in/formiat}{\raisebox{-0.05\height}\faLinkedin\ formiat} \ $|$ \ 
+\href{https://t.me/formiat}{\raisebox{-0.05\height}\faTelegram\ formiat} \ $|$ \ 
+\href{mailto:formiat95@gmail.com}{\raisebox{-0.05\height}\faEnvelope \ formiat95@gmail.com} \ $|$ \ 
+\href{tel:+541135616217}{\raisebox{-0.05\height}\faMobile \ +54 11 3561 6217} \\
 \end{tabularx}
 
 %----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
+%	SUMMARY
 %----------------------------------------------------------------------------------------
-
-%Interests/ Keywords/ Summary
 \section{Summary}
-This CV can also be automatically compiled and published using GitHub Actions. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
+Graduated from Taganrog State Radio Technical University (Southern Federal University), B.Sc.\ in Computer Science and Programming, 2017.
+Has 10+ years of programming experience and 8+ years of commercial software development, including 5 years of commercial Rust development.
+Since 2023 a core backend developer of \textbf{Pulsar}, a real-time traffic-enforcement platform (computer vision, 70 Rust modules on a message bus, 500K+ LOC) deployed on roadside complexes in Russia, Belarus and Uzbekistan: delivered 100+ tasks and 800+ commits, touched 68 of 69 modules, shipped 58 production hotfixes.
+Earlier: 2 years of HFT / crypto-exchange connectivity (13 exchanges, WebSocket + REST) and blockchain work (Substrate, NEAR, Oasis, Solana).
+In 2026 independently built and open-sourced 4 R\&D projects (280K+ LOC, 2,700+ tests): a multi-drone urban navigation and interception stack (C++20, ROS~2, PX4, Gazebo, CUDA MPPI), a drone-swarm coordination runtime (Rust, MAVLink), a self-organizing agent simulation (Rust, Bevy) and a deterministic multi-agent LLM orchestrator (Rust).
+Key skills: Rust (tokio, actix-web, diesel, tonic gRPC, OpenAPI), C++20, CUDA, OpenCV, GStreamer, ROS~2, PX4/MAVLink, Docker, GitLab CI, TypeScript/React. English: C2.
 
-%Experience
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
 \section{Work Experience}
 
-\begin{jobshort}{Designation}{Jan 2021 - present}
-long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width
+\begin{jobshort}{Rust Developer (Backend) --- SofIT Labs, Remote}{Oct 2023 -- present}
+\textbf{Pulsar} --- real-time photo/video enforcement system for road-traffic violations: multi-camera video ingest (GStreamer, industrial cameras), AI vehicle detection and tracking, licence-plate recognition, violation ``checkers'', evidence-material generation, REST/gRPC/MQTT integrations with regional back-offices. Rust workspace of 70 modules and 45 libraries running on NVIDIA Jetson (L4T) and x86 (CUDA / OpenVINO).
 \end{jobshort}
 
+\jobpart{Responsibilities}
+\begin{joblist}
+\item Design and implement backend features across the whole Pulsar stack: violation-detection logic, REST API (actix-web, OpenAPI), camera/peripheral drivers, external integrations, metrics.
+\item Investigate incidents from field complexes (traces, logs, recordings), reproduce them offline and ship hotfixes; maintain internal replay and debugging tooling.
+\item Drive engineering conventions (module contracts, route/handler conventions, test-portability rules) and the team's AI-assisted development workflow (agent instructions, orchestrated plan/implement/review loops).
+\end{joblist}
 
-\begin{joblong}{Designation}{Mar 2019 - Jan 2021}
-\item long long line of blah blah that will wrap when the table fills the column width
-\item again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-\end{joblong}
-  
-%Projects
-\section{Projects}
+\jobpart{Projects}
+\begin{joblist}
+\item \textbf{Violation checkers} (Red Light, Stop Line, Speeding, Average Speed, Parking, Box Junction, Traffic Flow, Lane, Headlights) --- owner of the checker code base: candidate-evidence model with automatic confirmation for Red Light / Stop Line, multiple stop lines and crossroad boundaries, priority between Average Speed and Speeding, report-point selector for Traffic Flow, track-merge fixes for opposite directions, taxi/bus whitelist, Uzbekistan red-light rules, PTZ / overview-camera survey frames for parking.
+\item \textbf{Security hardening for state certification (Uzbekistan)} --- sole implementer: brute-force guard module with login throttling, session invalidation on logout, clickjacking and path-traversal protection, role-based route authorization audit, removal of Swagger from production builds.
+\item \textbf{Video collages and Track Frame Sampler} --- horizontal / vertical video collages with parking-time compression robust to occlusion and frame jitter, quality/bitrate settings, generation speed-up; CLI tool that extracts annotation collages (3x3 / 4x4 / video) from recordings by trace timestamps.
+\item \textbf{External integrations} --- gRPC ``Doris Control'' export v2 (tonic; photo/video upload, timeouts, opt-out), FVF MQTT monitoring service (Krasnodar), UrbanTech and Admin-Practice monitoring metrics, Prometheus metrics for video-archive and certification, public API consistency.
+\item \textbf{Hardware and cameras} --- FFI bindings (bindgen) for the HIKROBOT camera SDK, Daheng camera flash backend and stream recovery after incomplete frames, traffic-light phase calibration and persistence, polarization-filter and floodlight fixes.
+\item \textbf{Platform work} --- migration of web routes onto the internal typed Bus, OpenAPI 3.1 schema migration (apistos / schemars), unified pagination, DB migrations (Diesel), long-term frame cache for videos, removal of legacy slots and channels, unit-test coverage for the violations module, trace-runner replay tool.
+\item \textbf{collage-hub} (solo, 2026) --- standalone Rust service (actix-web, reqwest) that proxies collage templates between a GitLab settings repository and Pulsar complexes: opaque-token sessions, CORS allow-list, YAML validation, demo rendering; 3.7K LOC, full API reference.
+\item \textbf{Web UI contributions} (2026) --- violation-settings screens, video-archive recording status and streamed MP4/TS download, manual traffic-light phase calibration UI (React 19, TypeScript, Reatom, Mantine, Vite, Bun tests).
+\end{joblist}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
+\jobpart{Results}
+\begin{joblist}
+\item 100+ tasks delivered, 825 commits, 100K+ lines added in a 530K-LOC codebase over 3 years; contributed to 68 of 69 modules.
+\item 58 production hotfixes for field complexes; security package for certification delivered in under 2 weeks (5 tasks).
+\item Video-collage pipeline designed, implemented and tuned on field recordings in 1 week.
+\end{joblist}
+
+\jobpart{Technologies:}
+Rust (tokio, actix-web, apistos/OpenAPI, diesel, tonic/prost gRPC, rumqttc MQTT, serde, tracing, metrics), OpenCV, GStreamer, CUDA / NVIDIA Jetson, FFI (bindgen, cxx), SQLite, Prometheus, Docker, GitLab CI, TypeScript / React.
+
+\vspace{6pt}
+\begin{jobshort}{Rust Developer --- WiseTech, Remote}{Sep 2022 -- Apr 2023}
+HFT trading system: development and refactoring of exchange connectors, added new crypto-exchanges, ported trading indicators from Python to Rust.
+\textbf{Technologies:} Rust, tokio, futures, WebSocket, REST, multithreading.
+\end{jobshort}
+
+\vspace{6pt}
+\begin{jobshort}{Rust Developer --- Udd\`ug, Remote}{Nov 2021 -- Sep 2022}
+\end{jobshort}
+\jobpart{Projects}
+\begin{joblist}
+\item \textbf{\href{https://github.com/uddugteam/index-daemon}{index-daemon}} (ICEX) --- lead developer (283 of 323 commits): rewrote a C++ market-data daemon in Rust; real-time ticker / trades / order-book ingestion from 13 crypto-exchanges over WebSocket and REST, coin average price and volume calculation, historical storage in sled with candles, JSON-RPC WebSocket server with subscriptions, graceful shutdown, config via files or env, integration tests, Dockerfile and GitHub Actions CI.
+\item \textbf{Blockchain} --- smart contracts and price oracles for Oasis, NEAR and Solana; Substrate pallet implementing ERC-20 semantics; Ethereum transaction crawler; ported a Go library to Rust.
+\end{joblist}
+\jobpart{Technologies:}
+Rust, tokio, WebSocket, REST, sled, JSON-RPC, Substrate, NEAR, Oasis, Solana, Docker, GitHub Actions.
+
+\vspace{6pt}
+\begin{jobshort}{PHP Web Developer --- FirstBit, Rostov-on-Don}{Oct 2020 -- Dec 2021}
+Development and support of clients' websites.
+\end{jobshort}
+
+\begin{jobshort}{PHP Web Developer --- x5studio, Rostov-on-Don}{Aug 2018 -- Sep 2020}
+Development and support of clients' websites.
+\end{jobshort}
+
+%----------------------------------------------------------------------------------------
+%	INDEPENDENT PROJECTS
+%----------------------------------------------------------------------------------------
+\section{Independent R\&D Projects (2026, open source)}
+
+\begin{jobshort}{\textbf{PX4 ROS 2 Drone Navigation} --- C++20, CUDA}{\href{https://github.com/formiat/px4-ros2-drone-nav}{GitHub} \ $|$ \ \href{https://youtu.be/ouRDE7C2NvM}{Video 1} \ $|$ \ \href{https://youtu.be/DAHCt6dmAAE}{Video 2}}
+Simulation-first autonomous navigation and interception stack for dense urban environments (ROS~2 Jazzy, PX4 SITL, Gazebo Harmonic). Global 3D lattice planner with sparse free-space topology for tunnels and shafts; local CUDA MPPI controller simulating thousands of dynamic rollouts per tick; navigation with a static map or from 3D lidar only (revisioned occupancy, incremental GPU ESDF). Radar-only target tracking and predictive interception, 3-vs-1 and 2-vs-2 interceptor missions with adaptive assignment, cooperative multi-drone air traffic with intent exchange and non-cooperative collision avoidance; mission outcomes adjudicated by a physics referee. 184K LOC, 251 source files, 1,580 unit tests, Dockerized NVIDIA dev environment, 1,600+ commits (Jun--Sep 2026).
+\end{jobshort}
+
+\begin{jobshort}{\textbf{Drone Swarm Lab} --- Rust}{\href{https://github.com/formiat/drone-swarm-lab}{GitHub}}
+Mission-level coordination runtime for autonomous drone fleets: deterministic simulation, distributed CBBA task allocation and strategy comparison benchmarks, heartbeat-based membership and failure recovery with task reallocation, mission DSL and command IR, replay logs, safety validation layer, MAVLink transport with a PX4 SITL/SIH supervisor for multi-agent mission upload and execution. 12 crates, 90K LOC, 1,195 tests, property-based testing (proptest), 540+ commits.
+\end{jobshort}
+
+\begin{jobshort}{\textbf{Multi-Agent Orchestrator} --- Rust}{\href{https://github.com/formiat/multi-agent-orchestrator-rs}{GitHub}}
+Deterministic FSM-driven orchestrator for delegated coding-agent workflows: an executor agent (Claude / Codex / OpenCode) and an independent reviewer agent loop through investigate / plan / implement stages via a file-based transport until a quality gate is reached; hang detection, retries, Git preflight, batch task runner. Used daily to deliver production work on Pulsar. 12.8K LOC, 260+ commits.
+\end{jobshort}
+
+\begin{jobshort}{\textbf{Swarm --- 2D self-organizing spacing network} --- Rust, Bevy}{}
+Agent simulation where agents self-organize into a spacing network from local rules only (repulsion / attraction, wall repulsion, escape mode, population events); pure simulation kernel with property tests plus a Bevy real-time visualisation.
+\end{jobshort}
+
+\begin{jobshort}{\textbf{NEAR Messenger} --- Rust, near-sdk (2024)}{\href{https://github.com/formiat/near-messenger-contract}{Contract} \ $|$ \ \href{https://github.com/formiat/near-messenger-client}{Client}}
+On-chain messenger prototype: NEAR smart contract (WASM) and a Rust client.
+\end{jobshort}
 
 %----------------------------------------------------------------------------------------
 %	EDUCATION
 %----------------------------------------------------------------------------------------
 \section{Education}
 \begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
-
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
-
-2022 & Class 12th Some Board \hfill  (Grades) \\
-
-2021 & Class 10th Some Board \hfill  (Grades) \\
+2013 -- 2017 & B.Sc.\ in Computer Science and Programming, \textbf{Taganrog State Radio Technical University} (Southern Federal University), Taganrog, Russia \\
 \end{tabularx}
-
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
-\section{Publications}
-\begin{refsection}[citations.bib]
-\nocite{*}
-\printbibliography[heading=none]
-\end{refsection}
 
 %----------------------------------------------------------------------------------------
 %	SKILLS
 %----------------------------------------------------------------------------------------
-\section{Skills}
+\section{Tech Skills}
 \begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
+Languages & \normalsize{Rust (main, 5 years commercial), C++20, CUDA, TypeScript, Python (reading / porting), PHP (3 years commercial), SQL}\\
+Rust ecosystem & \normalsize{tokio, actix-web, futures, serde, diesel, tonic / prost, apistos / schemars (OpenAPI), reqwest, tracing, metrics, clap, proptest, bindgen / cxx FFI, near-sdk, Substrate}\\
+Computer vision \& media & \normalsize{OpenCV, GStreamer, NVIDIA Jetson / CUDA, OpenVINO, industrial cameras (HIKROBOT, Daheng), RTSP}\\
+Robotics \& simulation & \normalsize{ROS~2, PX4 (SITL / SIH), Gazebo, MAVLink, MPPI, ESDF / occupancy mapping, lattice planning, Bevy}\\
+Infrastructure & \normalsize{Docker, GitLab CI, GitHub Actions, Prometheus, MQTT, gRPC, WebSocket, JSON-RPC, SQLite, sled, Linux}\\
+Practices & \normalsize{message-bus modular architecture, property-based and integration testing, replay-based debugging, AI-assisted engineering (agent orchestration, plan / implement / review loops)}\\
+Languages spoken & \normalsize{English (C2), Russian (native)}\\
 \end{tabularx}
 
 \vfill
